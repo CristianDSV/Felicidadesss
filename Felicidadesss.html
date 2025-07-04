@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Felicidades por tu grado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color1: #ede0d4;
+      --color2: #e6ccb2;
+      --color3: #ddb892;
+      --color4: #b08968;
+      --color5: #7f5539;
+      --color6: #9c6644;
+      --highlight: #ffc2d1;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(to bottom right, var(--color1), var(--highlight));
+      font-family: 'Great Vibes', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: var(--color5);
+    }
+
+    h1 {
+      font-size: 4em;
+      z-index: 1;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+      color: var(--color6);
+    }
+
+    .petal, .sticker {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .petal {
+      width: 12px;
+      height: 12px;
+      background-color: var(--highlight);
+      border-radius: 50%;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+      opacity: 0.7;
+      animation: fall 8s linear infinite;
+    }
+
+    .sticker {
+      animation: floatSticker 12s linear infinite;
+      opacity: 0.9;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(50vh) translateX(10vw) rotate(180deg);
+      }
+      100% {
+        transform: translateY(110vh) translateX(-5vw) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes floatSticker {
+      0% {
+        transform: translateY(-20vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Felicidades tuu</h1>
+  <script>
+    const svgStickers = [
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--color6)"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--color5)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`
+    ];
+
+    function createPetal() {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.left = `${Math.random() * 100}vw`;
+      petal.style.animationDuration = `${8 + Math.random() * 6}s`;
+      document.body.appendChild(petal);
+      setTimeout(() => petal.remove(), 15000);
+    }
+
+    function createSticker() {
+      const container = document.createElement('div');
+      container.className = 'sticker';
+      const size = 40 + Math.random() * 40;
+      container.style.width = `${size}px`;
+      container.style.height = `${size}px`;
+      container.style.left = `${Math.random() * 100}vw`;
+      container.style.animationDuration = `${10 + Math.random() * 6}s`;
+      container.innerHTML = svgStickers[Math.floor(Math.random() * svgStickers.length)];
+      document.body.appendChild(container);
+      setTimeout(() => container.remove(), 20000);
+    }
+
+    setInterval(createPetal, 300);
+    setInterval(createSticker, 6000);
+  </script>
+</body>
+</html>
